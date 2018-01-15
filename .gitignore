@@ -1,0 +1,7 @@
+.snapcraft
+*.snap
+librarian-puppet_*_source.tar.bz2
+
+parts/
+stage/
+prime/

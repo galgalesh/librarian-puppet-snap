@@ -1,0 +1,25 @@
+name: librarian-puppet
+version: '0.1'
+summary: librarian-puppet
+description: |
+  librarian-puppet
+grade: stable
+confinement: strict
+apps:
+  librarian-puppet:
+    command: usr/share/librarian-puppet/bin/librarian-puppet
+    environment:
+      RUBYLIB: '$SNAP/usr/local/lib/site_ruby/2.3.0:$SNAP/usr/local/lib/x86_64-linux-gnu/site_ruby:$SNAP/usr/local/lib/site_ruby:$SNAP/usr/lib/ruby/vendor_ruby/2.3.0:$SNAP/usr/lib/x86_64-linux-gnu/ruby/vendor_ruby/2.3.0:$SNAP/usr/lib/ruby/vendor_ruby:$SNAP/usr/lib/ruby/2.3.0:$SNAP/usr/lib/x86_64-linux-gnu/ruby/2.3.0'
+    plugs:
+      - home
+      - network
+parts:
+  librarian-puppet:
+    plugin: nil
+    stage-packages:
+      - librarian-puppet
+      - git
+      - puppet
+    prepare: |
+      sed -i 's/#!\/usr\/bin\/ruby/#!\/usr\/bin\/env ruby/' $SNAPCRAFT_PART_INSTALL/usr/bin/puppet
+      sed -i 's/#!\/usr\/bin\/ruby/#!\/usr\/bin\/env ruby/' $SNAPCRAFT_PART_INSTALL/usr/share/librarian-puppet/bin/librarian-puppet
